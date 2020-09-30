@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>Form</title>
+  <style>
+    h{
+      font-style: oblique;
+      font-size: 50px;
+      color: orange;
+
+
+      border-right: 20px;
+      border-right-color: lightgreen;
+      border-right-style: double;
+
+      border-left: 20px;
+      border-left-style: double;
+      border-left-color: pink;
+
+      border-top:20px;
+      border-top-style: double;
+      border-top-color: lightblue;
+
+      border-bottom: 20px;
+      border-bottom-style: double;
+      border-bottom-color: yellow;
+
+      border-radius: 40px;
+    }
+
+    hr{
+      border-style: dashed;
+      height:10px;
+      background-color: lightgray;
+      color: gray;
+    }
+    label {
+      font-size: 40px;
+    }
+
+    button {
+      font-size: 30px;
+      border-style: outset;
+      color: gray;
+      border-radius: 15px;
+    }
+
+    input {
+      font-size: 20px;
+      color: black;
+      border-color: inherit;
+    }
+
+    p {
+      font-size: 20px;
+      font-family: cursive;
+      color: orange;
+    }
+    label{
+      font-family: cursive;
+      color: gray;
+    }
+  </style>
+  <script>
+    // get the value of all parameters
+    function getValue() {
+      name = document.getElementById("name").value;
+      phone = document.getElementById("phone").value;
+      marks = document.getElementById("marks").value;
+      regNo = document.getElementById("regNo").value;
+      email = document.getElementById("email").value;
+    }
+
+    // make all input boxes white
+    function makeAllInputWhite() {
+      document.getElementById("name").style.borderColor="inherit";
+      document.getElementById("phone").style.borderColor="inherit";
+      document.getElementById("marks").style.borderColor="inherit";
+      document.getElementById("regNo").style.borderColor="inherit";
+      document.getElementById("email").style.borderColor="inherit";
+    }
+
+    // make all input boxes red
+    function makeAllInputRed() {
+      document.getElementById("name").style.borderColor="red";
+      document.getElementById("phone").style.borderColor="red";
+      document.getElementById("marks").style.borderColor="red";
+      document.getElementById("regNo").style.borderColor="red";
+      document.getElementById("email").style.borderColor="red";
+    }
+
+    // show successful submission
+    function submitted() {
+      document.getElementById("output").innerHTML = "Sucessfully Submitted.";
+    }
+
+    // show Un-successful submission
+    function notSubmitted() {
+      document.getElementById("output").innerHTML = "Not Submitted.";
+    }
+
+    // validate user input
+    function validate() {
+      getValue();
+      var regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+      var regMail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+      // if all parameters are empty
+      if (name=="" && phone=="" && marks=="" && regNo=="" && email=="") {
+        window.alert("Parameters should be not empty.");
+        makeAllInputRed();
+        notSubmitted();
+      }
+
+      // validation for Full Name
+      else if(name=="") {
+        window.alert("Name should be not empty.");
+        makeAllInputWhite();
+        document.getElementById("name").style.borderColor="red";
+        notSubmitted();
+      }
+      else if (!(regName.test(name))) {
+        window.alert("Write First Name + Last Name.");
+        makeAllInputWhite();
+        document.getElementById("name").style.borderColor="red";
+        notSubmitted();
+      }
+
+      // validation for Phone number
+      else if (phone=="") {
+        window.alert("Phone Number should be not empty.");
+        makeAllInputWhite();
+        document.getElementById("phone").style.borderColor="red";
+        notSubmitted();
+      }
+      else if (phone.length !=10) {
+        window.alert("Wrong Phone Number.");
+        makeAllInputWhite();
+        document.getElementById("phone").style.borderColor="red";
+        notSubmitted();
+      }
+
+      // validation for Marks
+      else if (marks=="") {
+        window.alert("Marks should be not empty.");
+        makeAllInputWhite();
+        document.getElementById("marks").style.borderColor="red";
+        notSubmitted();
+      }
+      else if (marks<0 || marks>100 ) {
+        window.alert("Marks should be in range 0-100.");
+        makeAllInputWhite();
+        document.getElementById("marks").style.borderColor="red";
+        notSubmitted();
+      }
+
+      // validation for Registration Number
+      else if (regNo=="") {
+        window.alert("Registration Number should be not empty.");
+        makeAllInputWhite();
+        document.getElementById("regNo").style.borderColor="red";
+        notSubmitted();
+      }
+      else if (regNo.length!=9) {
+        window.alert("Registration Number should be 9 digits.");
+        makeAllInputWhite();
+        document.getElementById("regNo").style.borderColor="red";
+        notSubmitted();
+      }
+
+      // validation for Email ID
+      else if (email=="") {
+        window.alert("Email ID should be not empty.");
+        makeAllInputWhite();
+        document.getElementById("email").style.borderColor="red";
+        notSubmitted();
+      }
+      else if (!regMail.test(email)) {
+        window.alert("Wrong Email ID.");
+        makeAllInputWhite();
+        document.getElementById("email").style.borderColor="red";
+        notSubmitted();
+      }
+
+      // When all parameters are valid
+       else {
+        makeAllInputWhite();
+        submitted();
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <center>
+    <br><br><br>
+    <h>Student Registration Form</h>
+    <br><br><br><br><br><hr><br>
+    <label>Full Name:&nbsp;&emsp;&ensp;&nbsp;</label>       <!--Full Name-->
+    <input type="text" id="name"><br>
+    <label>Phone Number:</label>                            <!--Phone Number-->
+    <input type="Number" id="phone"><br>
+    <label>Marks:&nbsp;&emsp;&emsp;&emsp;&ensp;</label>     <!--Marks-->
+    <input type="Number" id="marks"><br>
+    <label>Reg Number:&emsp;</label>                        <!--Registration Number-->
+    <input type="Number" id="regNo"><br>
+    <label>Email ID:&emsp;&emsp;&ensp;&nbsp;</label>        <!--Email ID-->
+    <input type="text" id="email"><br><br>
+    <button type="button" onclick=validate()>Submit</button><!--Submit button-->
+    <br><br><hr>
+    <p id="output"></p>                                     <!--Submission Status-->
+  </center>
+</body>
+
+</html>
